@@ -1,0 +1,144 @@
+:root {
+    font-size: 14px;
+    --main-bg-color: rgb(253, 169, 107);
+    --tab-bg-color: rgb(68, 204, 218);
+    --special-bg-color: rgb(254, 214, 64);
+}
+
+html {
+    background-color: var(--main-bg-color);
+}
+
+body {
+    width: 100%;
+    margin: 0px auto 6rem;
+    font-family: 'Courier New', Courier, monospace;
+    font-weight: 500;
+}
+
+a,
+a:hover,
+a:focus,
+a:active,
+a:visited {
+    color: black;
+    border-bottom: 1px solid var(--special-bg-color);
+    text-decoration: none;
+    font-style: oblique;
+}
+
+h2 {
+    margin: 3rem 0 2rem;
+    text-transform: uppercase;
+}
+
+h3 {
+    font-size: 1.4rem;
+}
+
+h4 {
+    font-size: 1.2rem;
+}
+
+header {
+    margin: 3rem;
+    text-align: center;
+}
+
+main {
+    padding: 0px 10px;
+}
+
+nav ul {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.img-mask {
+    height: 70px;
+    width: 300px;
+    position: relative;
+    overflow: hidden;
+}
+
+.img-mask img {
+    position: absolute;
+    top: -70px;
+    left: 0px;
+}
+
+.flexbox {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+    grid-gap: 1rem;
+}
+
+.week {
+    background-color: var(--tab-bg-color);
+    border-bottom-left-radius: 3rem;
+    border-top-right-radius: 3rem;
+    padding: 1rem 2rem 3rem 2rem;
+}
+
+.grid h2 {
+    grid-column: 1 / -1;
+    background-color: var(--special-bg-color);
+    padding: 2rem;
+}
+
+.grid h2 a,
+.grid h2 a:hover,
+.grid h2 a:focus,
+.grid h2 a:active,
+.grid h2 a:visited {
+    border-bottom-color: var(--tab-bg-color);
+}
+
+ul {
+    padding-left: 1rem;
+}
+
+.week ul li,
+ul li {
+    margin-bottom: 1rem;
+}
+
+@media (min-width: 768px) {
+    body {
+        width: 740px;
+    }
+
+    header {
+        text-align: right;
+        margin: 3rem 0;
+    }
+
+    main {
+        padding: 0px;
+    }
+
+    .flexbox {
+        flex-direction: row;
+    }
+
+    .columns {
+        columns: 2;
+    }
+
+    .columns div {
+        break-inside: avoid;
+    }
+}
+
+@media (min-width: 960px) {
+    body {
+        width: 940px;
+    }
+}

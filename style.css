@@ -1,0 +1,256 @@
+@import url(typography.css);
+
+:root {
+  font-size: 16px;
+  --main-bg-color: rgb(97, 160, 255);
+  --tab-bg-color: rgb(225, 162, 64);
+  --special-bg-color: rgb(190, 90, 184);
+  --corner-bevel: 100;
+}
+
+html {
+  background-color: var(--main-bg-color);
+}
+
+body {
+  margin: 0px auto 0;
+  font-family: "Open Sans", sans-serif;
+  font-weight: 400;
+  background-image: url("background-grid.png");
+  background-size: 100%;
+  padding-bottom: 60px;
+}
+
+main {
+  margin: 20px auto 0px;
+  padding: 47px 0.5rem 0;
+}
+
+/* BASIC RESET */
+a,
+a:hover,
+a:focus,
+a:active,
+a:visited {
+  color: black;
+  text-decoration: none;
+}
+
+a:hover {
+  background-color: var(--tab-bg-color);
+}
+
+img {
+  max-width: 100%;
+}
+
+ul {
+  padding: 0;
+  margin: 0;
+  list-style: none;
+}
+
+/* NAVBAR */
+header {
+  padding: 0;
+  border-bottom: 1px solid black;
+  position: fixed;
+  width: 100vw;
+  top: 0;
+  background-color: var(--main-bg-color);
+  background-image: url("background-grid.png");
+  background-size: 100%;
+}
+
+.logo {
+  font-size: 1.3rem;
+  line-height: initial;
+  margin: 0rem;
+  display: inline-block;
+  letter-spacing: 0.5px;
+}
+
+header nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 1rem;
+  z-index: 10;
+  /* background-color: var(--main-bg-color); */
+}
+
+header nav ul {
+  display: none;
+  padding: 1rem;
+  margin: 0rem;
+  position: absolute;
+  text-align: right;
+  right: 0px;
+  top: 45px;
+  width: 100vw;
+  background-color: var(--main-bg-color);
+  border-bottom: 1px solid black;
+  z-index: 10;
+}
+
+header nav ul li {
+  padding: 0.25rem 0;
+}
+
+#navToggle {
+  display: none;
+}
+
+#navToggle ~ label::before {
+  content: "+";
+  font-size: 2rem;
+  display: inline-block;
+}
+
+#navToggle:checked ~ ul {
+  display: block;
+}
+
+#navToggle:checked ~ label::before {
+  transform: rotate(-45deg);
+}
+
+aside,
+footer {
+  display: none;
+}
+
+/* ENDOF NAVBAR */
+
+/* MAIN SECTIONS */
+main h1 {
+  text-align: center;
+}
+
+main ul {
+  font-style: italic;
+}
+
+main ul li {
+  margin: 0.5rem 0.3rem 0.5rem;
+  /* margin-bottom: 1rem; */
+}
+
+main a,
+main a:hover,
+main a:focus,
+main a:active,
+main a:visited {
+  border-bottom: 1px solid var(--special-bg-color);
+  font-style: oblique;
+}
+
+.project-resources,
+.project-brief,
+.week {
+  padding-left: 10%;
+  margin-top: 10%;
+  margin-bottom: 10%;
+  width: 83%;
+}
+
+.project-resources h4 {
+  text-align: left;
+}
+
+.documentation {
+  border-style: dotted;
+  border-width: 1px;
+  border-radius: 10px;
+  padding: 5%;
+  margin: 10% 0 10%;
+  max-width: 85%;
+}
+
+hr {
+  border-top: 1px dashed black;
+  margin: 80px 0 80px;
+  z-index: -1;
+  border-bottom: none;
+}
+
+/* MEDIA QUERIES */
+
+@media (min-width: 768px) {
+  header {
+    display: none;
+  }
+
+  /* LAGRER SCREEN NAV */
+  aside,
+  footer {
+    display: initial;
+  }
+
+  aside {
+    writing-mode: vertical-lr;
+    position: fixed;
+    top: 0;
+    right: 0;
+    height: 100vh;
+    padding: 0.8rem;
+    border-left: 1px solid black;
+    background-color: var(--main-bg-color);
+    background-image: url("background-grid.png");
+  }
+
+  aside .logo:first-child {
+    margin-inline-end: 1rem;
+  }
+
+  footer {
+    position: fixed;
+    bottom: 0px;
+    left: 0px;
+    border-top: 1px solid black;
+    background-color: var(--main-bg-color);
+    width: 100vw;
+  }
+
+  footer nav ul {
+    display: flex;
+    justify-content: start;
+  }
+
+  footer nav ul li {
+    display: inline-block;
+    padding: 1rem;
+    border-right: 1px solid black;
+  }
+
+  footer nav ul li:hover {
+    background: var(--tab-bg-color);
+  }
+
+  footer nav ul li:last-child {
+    background-color: var(--special-bg-color);
+  }
+
+  footer nav ul li:last-child:hover {
+    background: var(--tab-bg-color);
+  }
+}
+
+/*seminar layout*/
+
+.seminar-title {
+  margin-bottom: 120px;
+}
+
+@media (min-width: 800px) {
+  .documentation {
+    width: 80%;
+  }
+}
+
+@media (min-width: 960px) {
+  section {
+    width: 940px;
+    margin: auto;
+  }
+}
