@@ -2,9 +2,9 @@
 
 :root {
   font-size: 16px;
-  --main-bg-color: rgb(97, 160, 255);
-  --tab-bg-color: rgb(225, 162, 64);
-  --special-bg-color: rgb(190, 90, 184);
+  --main-bg-color: rgb(241, 255, 172);
+  --tab-bg-color: rgb(173, 180, 247);
+  --special-bg-color: rgb(90, 190, 106);
   --corner-bevel: 100;
 }
 
@@ -195,8 +195,7 @@ hr {
     height: 100vh;
     padding: 0.8rem;
     border-left: 1px solid black;
-    background-color: var(--main-bg-color);
-    background-image: url("background-grid.png");
+    background-color: transparent;
   }
 
   aside .logo:first-child {
