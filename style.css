@@ -2,9 +2,9 @@
 
 :root {
   font-size: 16px;
-  --main-bg-color: rgb(172, 255, 216);
-  --tab-bg-color: rgb(247, 173, 211);
-  --special-bg-color: rgb(90, 190, 106);
+  --main-bg-color: rgb(183, 236, 153);
+  --tab-bg-color: rgb(210, 201, 126);
+  --special-bg-color: rgb(190, 90, 90);
   --corner-bevel: 100;
 }
 
