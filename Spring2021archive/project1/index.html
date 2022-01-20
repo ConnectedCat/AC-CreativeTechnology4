@@ -41,12 +41,12 @@
         function fetchRandomLine() {
             fetch('https://poetrydb.org/lines/Latitudeless%20Place/lines.json').
             then((result) => {
-                console.log("Result from Poetry DB:")
+                console.log("Result from Poetry DB:")
                 console.log(result);
                 return result.json();
             }).
             then((data) => {
-                console.log("JSON data from Poetry DB:");
+                console.log("JSON data from Poetry DB:");
                 console.log(data);
                 let randomNumber = parseInt(Math.random() * data[0].lines.length);
                 let randomLine = data[0].lines[randomNumber];
