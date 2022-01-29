@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Data fetching machine!</title>
+    <style>
+        img {
+            max-width: 300px;
+        }
+    </style>
+</head>
+
+<body>
+    <button id="startTheProcess">START!</button>
+    <section id="cocktailSection"></section>
+    <section id="pictureSection"></section>
+    <section id="weatherSection"></section>
+
+    <script>
+        // references
+        let triggerButton = document.getElementById("startTheProcess")
+        let randomCocktailURL = "https://www.thecocktaildb.com/api/json/v1/1/random.php"
+        let cocktailSection = document.getElementById("cocktailSection")
+        let pictureSection = document.getElementById("pictureSection")
+        let weatherSection = document.getElementById("weatherSection")
+        let dateSection = document.getElementById("dateSection")
+
+        let fetchDate = randomDate(new Date(1995, 6, 20), new Date())
+
+
+        let nasaAPoDBaseURL = "https://api.nasa.gov/planetary/apod?"
+        let nasaAPIkey = "&api_key=DEMO_KEY"
+        let nasaAPIdate = "&date=" + fetchDate
+        
+
+        let weatherBaseURL = "https://weather.visualcrossing.com/VisualCrossingWebServices/rest/services/weatherdata/"
+        let contentType = "history?"
+        let aggHrs = "&aggregateHours=24"
+        let startDT = "&startDateTime=" + fetchDate + "T00:00:00"
+        let endDT = "&endDateTime=" + fetchDate + "T00:00:00"
+        let unit = "&unitGroup=uk"
+        let format = "&contentType=json"
+        let weatherLocation = "&location=LosAngeles,CA,US"
+        let apiKey = "&key=F5S85MYAKSL47W6LW5J6FBAKL"
+
+        // functions
+
+
+        function triggerHandler() {
+            generateNewDate()
+            fetchRandomCocktail()
+        }
+        
+        // fetchers
+        function fetchRandomCocktail() {
+            fetch(randomCocktailURL)
+                .then((response) => {
+                    return response.json()
+                })
+                .then((data) => {
+                    cocktailDataHandler(data)
+                })
+                .catch((serverError) => {
+                    console.error(serverError)
+                })
+        }
+
+        function fetchNASApicture() {
+            // https://api.nasa.gov/planetary/apod?api_key=DEMO_KEY&2018-11-12
+            let queryURL = nasaAPoDBaseURL + nasaAPIkey + nasaAPIdate
+
+            fetch(queryURL)
+                .then((response) => {
+                    return response.json()
+                })
+                .then((data) => {
+                    nasaPicureDataHandler(data)
+                })
+                .catch((serverError) => {
+                    console.error(serverError)
+                })
+        }
+
+        function fetchWeatherData(){
+            let queryURL = weatherBaseURL + contentType + aggHrs + startDT + endDT + unit + format + weatherLocation + apiKey
+            fetch(queryURL)
+                .then((response) => {
+                    return response.json()
+                })
+                .then((data) => {
+                    weatherDataHandler(data)
+                })
+                .catch((serverError) => {
+                    console.error(serverError)
+                })
+        }
+
+        // handlers
+        function cocktailDataHandler(cocktailData) {
+            while (cocktailSection.firstChild) {
+                cocktailSection.removeChild(cocktailSection.firstChild)
+            }
+
+            let intro = document.createElement('h2')
+            intro.innerText = "On " + fetchDate + " we had"
+            cocktailSection.appendChild(intro)
+
+            let name = cocktailData.drinks[0].strDrink
+            let thumb = cocktailData.drinks[0].strDrinkThumb
+
+            let nameContainer = document.createElement('h3')
+            nameContainer.innerText = name
+            cocktailSection.appendChild(nameContainer)
+
+            let thumbContainer = document.createElement('img')
+            thumbContainer.src = thumb
+            thumbContainer.alt = name
+            cocktailSection.appendChild(thumbContainer)
+
+            fetchNASApicture()
+            fetchWeatherData()
+        }
+
+        function nasaPicureDataHandler(pictureData){
+            while (pictureSection.firstChild) {
+                pictureSection.removeChild(pictureSection.firstChild)
+            }
+
+            let name = pictureData.title
+            let image = pictureData.url
+
+
+            let intro = document.createElement('h2')
+            intro.innerText = "watching "
+            pictureSection.appendChild(intro)
+            
+            let nameContainer = document.createElement('h3')
+            nameContainer.innerText = name
+            pictureSection.appendChild(nameContainer)
+
+            let thumbContainer = document.createElement('img')
+            thumbContainer.src = image
+            thumbContainer.alt = name
+            pictureSection.appendChild(thumbContainer)
+        }
+
+        function weatherDataHandler(weatherData){
+            while (weatherSection.firstChild) {
+                weatherSection.removeChild(weatherSection.firstChild)
+            }
+
+            let weatherType = weatherData.locations['LosAngeles,CA,US'].values[0].weathertype
+            let conditions = weatherData.locations['LosAngeles,CA,US'].values[0].conditions
+
+            let connection = ""
+            if(weatherType && conditions){
+                connection = " and "
+            }
+            console.info(weatherType)
+            console.info(conditions)
+            
+            let nameContainer = document.createElement('h3')
+            nameContainer.innerText = "while the weather was " + weatherType + connection + conditions
+            weatherSection.appendChild(nameContainer)
+
+        }
+
+        //helper functions
+        function randomDate(start, end) {
+            var d = new Date(start.getTime() + Math.random() * (end.getTime() - start.getTime())),
+                month = '' + (d.getMonth() + 1),
+                day = '' + d.getDate(),
+                year = d.getFullYear();
+
+            if (month.length < 2) month = '0' + month;
+            if (day.length < 2) day = '0' + day;
+
+            return [year, month, day].join('-');
+        }
+
+        function generateNewDate(){
+            fetchDate = randomDate(new Date(1995, 6, 20), new Date())
+            //for the nasa picture
+            nasaAPIdate = "&date=" + fetchDate
+            //for the weather
+            startDT = "&startDateTime=" + fetchDate + "T00:00:00"
+            endDT = "&endDateTime=" + fetchDate + "T00:00:00"
+        }
+
+        // events
+        triggerButton.addEventListener('click', triggerHandler)
+    </script>
+</body>
+
+</html>
